@@ -15,7 +15,7 @@ class Book extends Model
         return $this->hasMany(Review::class);
     }
 
-    //Bu fonksiyon, belirli bir başlık içeren kayıtları filtrelemek için kullanılır
+    //Bu fonksiyon, belirli bir başlık içeren kayıtları filtrelemek için kullanılır.
     public function scopeTitle(Builder $query, string $title): Builder
     {
         return $query->where("title","like","%". $title ."%");

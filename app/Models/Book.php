@@ -65,6 +65,7 @@ class Book extends Model
 
     public function scopePopularLastMonth(Builder $query): Builder|QueryBuilder
     {
+        //ilk parametre 1 ay öncesinin tarihini alırken (meali:şimdiden bir ay geri git. ikinci parametre şimdinin zamanını alır.) 
         return $query->popular(now()->subMonth(), now())
             ->highestRated(now()->subMonth(), now())
             ->minReviews(2);
@@ -97,7 +98,7 @@ class Book extends Model
             fn(Book $book) => cache()->forget('book:' . $book->id)
         );
         static::deleted(
-            fn(Book $book) => cache()->forget('book:' . $book->id)
+            fn(Book $book) => cache()->forget('book:' . $review->book_id)
         );
     }
 
